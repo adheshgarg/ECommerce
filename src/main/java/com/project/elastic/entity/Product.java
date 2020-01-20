@@ -16,23 +16,23 @@ import java.util.Map;
 @Document(indexName = "productid",type = "product")
 public class Product {
      @Id
-     private String productid;
-     private String categoryid;
-     private String productname;
-     private String productimageurl;
-     private Map<String,String> productattributes;
-     private int productrating;
-     private String productdescription;
+     private String productId;
+     private String categoryId;
+     private String productName;
+     private String productImageUrl;
+     private Map<String,String> productAttributes;
+     private int productRating;
+     private String productDescription;
 
      public Product(){}
 
     public Product(String productId, String categoryID, String productName, String productImageUrl, Map<String, String> productAttributes, int productRating, String productDescription) {
-        this.productid = productId;
-        categoryid = categoryID;
-        this.productname = productName;
-        this.productimageurl = productImageUrl;
-        this.productattributes = productAttributes;
-        this.productrating = productRating;
-        this.productdescription = productDescription;
+        this.productId = productId;
+        categoryId = categoryID;
+        this.productName = productName;
+        this.productImageUrl = productImageUrl;
+        this.productAttributes = productAttributes;
+        this.productRating = productRating;
+        this.productDescription = productDescription;
     }
 }

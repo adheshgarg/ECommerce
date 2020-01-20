@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +26,7 @@ public class ElasticController {
         Product saveProduct = new Product();
         BeanUtils.copyProperties(newProduct, saveProduct);
         Product productCreated  = elasticSevice.addProduct(saveProduct);
-        return new ResponseEntity<String>(productCreated.getProductid(),HttpStatus.CREATED);
+        return new ResponseEntity<String>(productCreated.getProductId(),HttpStatus.CREATED);
     }
 
     @CrossOrigin("*")
@@ -34,6 +35,21 @@ public class ElasticController {
         Optional<Product> getProduct = elasticSevice.findById(id);
         return getProduct;
     }
+
+    @CrossOrigin("*")
+    @GetMapping("/microservice/{id}")
+    public Optional<Product> sendJsonString(@PathVariable("id") String id){
+        return elasticSevice.findById(id);
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/searchQuery/{name}")
+    public Collection<Product> getSearchResults(@PathVariable("name") String name){
+        return elasticSevice.fuzzyQuery(name);
+    }
+
+
+
 
 
 

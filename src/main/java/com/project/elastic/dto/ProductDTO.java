@@ -9,11 +9,12 @@ import java.util.Map;
 @Getter
 @Setter
 public class ProductDTO {
-    private String productid;
-    private String categoryid;
-    private String productname;
-    private String productimageurl;
-    private Map<String,String> productattributes;
-    private int productrating;
-    private String productdescription;
+    @Id
+    private String productId;
+    private String categoryId;
+    private String productName;
+    private String productImageUrl;
+    private Map<String,String> productAttributes;
+    private int productRating;
+    private String productDescription;
 }

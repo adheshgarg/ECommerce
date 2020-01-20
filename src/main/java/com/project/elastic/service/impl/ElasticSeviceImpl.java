@@ -22,7 +22,7 @@ public class ElasticSeviceImpl implements ElasticService {
     ElasticRepository elasticRepository;
 
     @Autowired
-    ElasticsearchTemplate elasticsearchTemplate;
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     public Product addProduct(Product product){
        return elasticRepository.save(product);
@@ -42,9 +42,8 @@ public class ElasticSeviceImpl implements ElasticService {
                         QueryBuilders.queryStringQuery("*" + queryString + "*")
                                 .lenient(true)
                                 .field("productName")
-                                .field("productUsp")
                                 .field("productDescription")
-                                .field("staticAttributeList.attributeDescription")
+                                .field("productAttributes")
                 );
 
         NativeSearchQuery build = new NativeSearchQueryBuilder()
@@ -58,9 +57,8 @@ public class ElasticSeviceImpl implements ElasticService {
         QueryBuilder query = QueryBuilders.multiMatchQuery("*"+queryText+"*")
                 .lenient(true)
                 .field("productName")
-                .field("productUsp")
                 .field("productDescription")
-                .field("staticAttributeList.attributeDescription")
+                .field("productAttributes")
                 .fuzziness(2);
 
         NativeSearchQuery build = new NativeSearchQueryBuilder()
