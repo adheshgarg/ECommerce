@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Map;
@@ -12,25 +13,26 @@ import java.util.Map;
 @Getter
 @Setter
 @Builder
-@Document(indexName = "product-index")
+@Document(indexName = "productid",type = "product")
 public class Product {
-     String productId;
-     String CategoryID;
-     String productName;
-     String productImageUrl;
-     Map<String,String> productAttributes;
-     int productRating;
-     String productDescription;
+     @Id
+     private String productid;
+     private String categoryid;
+     private String productname;
+     private String productimageurl;
+     private Map<String,String> productattributes;
+     private int productrating;
+     private String productdescription;
 
      public Product(){}
 
     public Product(String productId, String categoryID, String productName, String productImageUrl, Map<String, String> productAttributes, int productRating, String productDescription) {
-        this.productId = productId;
-        CategoryID = categoryID;
-        this.productName = productName;
-        this.productImageUrl = productImageUrl;
-        this.productAttributes = productAttributes;
-        this.productRating = productRating;
-        this.productDescription = productDescription;
+        this.productid = productId;
+        categoryid = categoryID;
+        this.productname = productName;
+        this.productimageurl = productImageUrl;
+        this.productattributes = productAttributes;
+        this.productrating = productRating;
+        this.productdescription = productDescription;
     }
 }
