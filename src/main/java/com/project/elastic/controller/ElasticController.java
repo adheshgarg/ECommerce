@@ -2,11 +2,14 @@ package com.project.elastic.controller;
 
 import com.project.elastic.dto.ProductDTO;
 import com.project.elastic.entity.Product;
+import com.project.elastic.repository.ElasticRepository;
 import com.project.elastic.service.impl.ElasticSeviceImpl;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -48,9 +51,21 @@ public class ElasticController {
         return elasticSevice.fuzzyQuery(name);
     }
 
+    @Autowired
+    ElasticRepository elasticRepository;
 
+    private String topicName="data";
+    private String groupId="groupid";
+    private KafkaConsumer<String,Product> kafkaConsumer;
 
+    @KafkaListener(topics = "test", groupId = "group_id")
+    public void consumeProduct(String productDTO) {
 
+        System.out.println(productDTO);
+        Product product = new Product();
+        BeanUtils.copyProperties(productDTO, product);
+        elasticRepository.save(product);
+    }
 
 
 }
