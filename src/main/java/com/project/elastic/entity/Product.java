@@ -19,19 +19,21 @@ public class Product {
      private String productId;
      private String categoryId;
      private String productName;
-     private String productImageUrl;
+     private String imageUrl;
      private Map<String,String> productAttributes;
+     private double productPrice;
      private int productRating;
      private String productDescription;
 
      public Product(){}
 
-    public Product(String productId, String categoryID, String productName, String productImageUrl, Map<String, String> productAttributes, int productRating, String productDescription) {
+    public Product(String productId, String categoryId, String productName, String imageUrl, Map<String, String> productAttributes, double productPrice, int productRating, String productDescription) {
         this.productId = productId;
-        categoryId = categoryID;
+        this.categoryId = categoryId;
         this.productName = productName;
-        this.productImageUrl = productImageUrl;
+        this.imageUrl = imageUrl;
         this.productAttributes = productAttributes;
+        this.productPrice = productPrice;
         this.productRating = productRating;
         this.productDescription = productDescription;
     }

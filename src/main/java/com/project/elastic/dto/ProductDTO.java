@@ -13,8 +13,9 @@ public class ProductDTO {
     private String productId;
     private String categoryId;
     private String productName;
-    private String productImageUrl;
+    private String imageUrl;
     private Map<String,String> productAttributes;
+    private double productPrice;
     private int productRating;
     private String productDescription;
 }

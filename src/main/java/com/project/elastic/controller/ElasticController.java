@@ -1,5 +1,6 @@
 package com.project.elastic.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.elastic.dto.ProductDTO;
 import com.project.elastic.entity.Product;
 import com.project.elastic.repository.ElasticRepository;
@@ -16,7 +17,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/search")
 @CrossOrigin("*")
 public class ElasticController {
 
@@ -60,11 +61,14 @@ public class ElasticController {
 
     @KafkaListener(topics = "test", groupId = "group_id")
     public void consumeProduct(String productDTO) {
-
-        System.out.println(productDTO);
-        Product product = new Product();
-        BeanUtils.copyProperties(productDTO, product);
-        elasticRepository.save(product);
+       try {
+           System.out.println(productDTO);
+           ObjectMapper objectMapper = new ObjectMapper();
+           Product product = objectMapper.readValue(productDTO, Product.class);
+           elasticSevice.addProduct(product);
+       }catch(Exception e){
+           System.out.println(e);
+       }
     }
 
 

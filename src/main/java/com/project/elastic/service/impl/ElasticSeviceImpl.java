@@ -58,7 +58,7 @@ public class ElasticSeviceImpl implements ElasticService {
                 .lenient(true)
                 .field("productName")
                 .field("productDescription")
-                .field("productAttributes")
+                .field("productttributes")
                 .fuzziness(2);
 
         NativeSearchQuery build = new NativeSearchQueryBuilder()
