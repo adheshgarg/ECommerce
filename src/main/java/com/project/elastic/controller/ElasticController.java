@@ -52,6 +52,12 @@ public class ElasticController {
         return elasticSevice.fuzzyQuery(name);
     }
 
+    @CrossOrigin("*")
+    @PostMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable("id") String name){
+         elasticSevice.deleteById(name);
+    }
+
     @Autowired
     ElasticRepository elasticRepository;
 

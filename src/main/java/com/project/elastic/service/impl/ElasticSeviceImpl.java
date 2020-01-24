@@ -36,6 +36,10 @@ public class ElasticSeviceImpl implements ElasticService {
         return elasticRepository.search(searchQuery);
     }
 
+    public void deleteById(String id){
+        elasticRepository.deleteById(id);
+    }
+
     public Collection<Product> query(String queryString){
         QueryBuilder query = QueryBuilders.boolQuery()
                 .should(
@@ -56,7 +60,7 @@ public class ElasticSeviceImpl implements ElasticService {
     public Collection<Product> fuzzyQuery(String queryText){
         QueryBuilder query = QueryBuilders.multiMatchQuery("*"+queryText+"*")
                 .lenient(true)
-                .field("productName")
+                .field("productName^2")
                 .field("productDescription")
                 .field("productttributes")
                 .fuzziness(2);
